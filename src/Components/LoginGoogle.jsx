@@ -1,3 +1,4 @@
+import { Button } from "@mui/material"
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import { auth } from "../Utils/firebase"
 
@@ -16,7 +17,8 @@ const LoginGoogle = () => {
 
   return (
     <>
-    <button className='border-b-2 px-2 m-auto' onClick={loginGoogle}>Google access</button>
+    <Button sx={{bgcolor: "#FCBF0E"}} onClick={loginGoogle} variant="contained">Google access</Button>
+
     </>
   )
 }

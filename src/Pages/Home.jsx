@@ -1,13 +1,14 @@
+import { Box, Typography } from '@mui/material'
 import React from 'react'
 
 
 const Home = () => {
 
   return (
-    <>
-    <h1 className='text-xl text-center mb-8'>Home</h1>
+    <Box sx={{mt:"1rem", maxWidth:"400px", textAlign:"center", mx:"auto"}}>
+    <Typography variant='h4'>Home</Typography>
 
-    </>
+    </Box>
   )
 }
 

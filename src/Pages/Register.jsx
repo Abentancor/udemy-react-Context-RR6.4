@@ -1,22 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect} from 'react'
 import { useUserContext } from '../Context/ContextUser';
 import { register } from '../Utils/firebase';
 
 import { Formik } from 'formik'
 import * as Yup from "yup"
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { Avatar, Box, Button, TextField, Typography } from '@mui/material'
+import LoginIcon from '@mui/icons-material/Login';
+import { LoadingButton } from '@mui/lab'
 
 const Register = () => {
 
 
     const navigate = useNavigate()
-    const {user}= useUserContext 
+    const {user}= useUserContext()
 
     useEffect(()=>{
         if(user){
             navigate('/dashboard')
         }
-    }, [])
+    }, [user])
 
 
     const onSubmit = async ({email, password}, {setsubmitting, setErrors, resetForm})=>{
@@ -38,8 +42,11 @@ const Register = () => {
 
     return (
         <>
-        <div className='w-1/2 m-auto gap-4 flex flex-col my-36'>
-            <h1 className='text-xl text-center'>Register</h1>
+        <Box sx={{mt:"1rem", maxWidth:"400px", textAlign:"center", mx:"auto"}} className=''>
+            <Avatar sx={{mx: "auto", bgcolor:"#111"}}>
+                <LoginIcon/>
+            </Avatar>
+            <Typography variant='h4' sx={{}}>Register</Typography>
 
             <Formik
              initialValues={{email:"", password:""}}
@@ -47,36 +54,48 @@ const Register = () => {
              validationSchema={validationSchema}
              >
             {({values, handleSubmit, handleChange, errors, touched, handleBlur, isSubmitting})=>(
-                <form className='m-auto gap-4 flex flex-col' onSubmit={handleSubmit}>
-                    <input 
-                        className='p-2 rounded-md text-black'  
+                <Box sx={{mt:2}} component="form" className='' onSubmit={handleSubmit}>
+                    <TextField 
+                        className=''  
                         value={values.email} 
                         onChange={handleChange} 
                         type="text" 
-                        placeholder='Ingrese su Email'
+                        placeholder='email@example.com'
                         name="email"
                         onBlur={handleBlur}
+                        id="email"
+                        label="ingrese su email"
+                        fullWidth
+                        sx={{mb:3}}
+                        error={ errors.email && touched.email && errors.email}
+                        helperText={ errors.email && touched.email && errors.email}
                     />
-                    {
-                        errors.email && touched.email && errors.email
-                    }
-                    <input 
-                        className='p-2 rounded-md text-black'  
+
+                    <TextField 
+                        className=''  
                         value={values.password} 
                         onChange={handleChange} 
                         type="password" 
                         placeholder='Ingrese su Password'
                         name="password"
                         onBlur={handleBlur}
+                        id="password"
+                        label="ingrese su password"
+                        fullWidth
+                        sx={{mb:3}}
+                        error={ errors.email && touched.email && errors.email}
+                        helperText={ errors.email && touched.email && errors.email}
                     />
-                    {
-                        errors.password && touched.password && errors.password
-                    }
-                    <button disabled={isSubmitting} className='border-b-2 px-2 m-auto' type='submit'>Register</button>
-                </form>
+
+                    <LoadingButton sx={{mb:3}} loading={isSubmitting} variant="contained" fullWidth disabled={isSubmitting} className='' type='submit'>Register</LoadingButton>
+                    <Button
+                    component={Link}
+                    to="/login"
+                    >Accede</Button>
+                </Box>
             )}
             </Formik>
-         </div>
+         </Box>
         </>
       )
 }

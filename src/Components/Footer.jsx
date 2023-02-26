@@ -1,8 +1,19 @@
-import React from 'react'
+import { AppBar, Toolbar, Typography } from '@mui/material'
+
+
 
 const Footer = () => {
+
   return (
-    <div className='absolute w-full bottom-0 font-semibold text-center text-white  p-4'>Footer</div>
+    <AppBar position="fixed" color="primary" sx={{ 
+      top: 'auto', 
+      bottom: 0,}} >
+      <Toolbar sx={{ justifyContent: 'center' }} >
+        <Typography variant="body1" sx={{ fontSize: '14px' }} >
+          Footer
+        </Typography>
+      </Toolbar>
+    </AppBar>
   )
 }
 

@@ -3,18 +3,22 @@ import React, { useEffect } from 'react'
 import { Formik } from 'formik'
 import * as Yup from "yup"
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 import { useUserContext } from '../Context/ContextUser'
 
 import { login } from '../Utils/firebase'
 import LoginGoogle from '../Components/LoginGoogle'
 
+import { Avatar, Box, Button, TextField, Typography } from '@mui/material'
+import LoginIcon from '@mui/icons-material/Login';
+import { LoadingButton } from '@mui/lab'
+
 const LogIn = () => {
 
 
     const navigate = useNavigate()
-    const {user}= useUserContext 
+    const {user}= useUserContext()
 
     useEffect(()=>{
         if(user){
@@ -49,48 +53,60 @@ const LogIn = () => {
 
 
   return (
-    <>
-    <div className='w-1/2 m-auto gap-4 flex flex-col my-36'>
-        <h1 className='text-xl text-center'>LogIn</h1>
+    <Box sx={{mt:"1rem", maxWidth:"400px", textAlign:"center", mx:"auto"}}>
+            <Avatar sx={{mx: "auto", bgcolor:"#111"}}>
+                <LoginIcon/>
+            </Avatar>
+        <Typography variant='h4'>Login</Typography>
         <Formik
         initialValues={{email:"", password:""}}
         onSubmit ={onSubmit}
         validationSchema={validationSchema}
         >
             {({values, handleSubmit, handleChange, errors, touched, handleBlur, isSubmitting})=>(
-                <form className='m-auto gap-4 flex flex-col' onSubmit={handleSubmit}>
-                    <input 
-                        className='p-2 rounded-md text-black' 
+                <Box sx={{mt:2}} component="form" className='' onSubmit={handleSubmit}>
+
+                    <TextField
+                        className='' 
                         value={values.email} 
                         onChange={handleChange} 
                         type="text" 
-                        placeholder='Ingrese su Email'
+                        placeholder='Email@example.com'
                         name="email"
                         onBlur={handleBlur}
-
+                        id="email"
+                        label="ingrese su email"
+                        fullWidth
+                        sx={{mb:3}}
+                        error={ errors.email && touched.email && errors.email}
+                        helperText={ errors.email && touched.email && errors.email}
                     />
-                    {
-                        errors.email && touched.email && errors.email
-                    }
-                    <input 
-                        className='p-2 rounded-md text-black' 
+
+                    <TextField 
+                        className='' 
                         value={values.password} 
                         onChange={handleChange} 
                         type="password" 
                         placeholder='Ingrese su Password' 
                         name='password'
                         onBlur={handleBlur}
+                        id="password"
+                        label="ingrese su password"
+                        fullWidth
+                        sx={{mb:3}}
+                        error={ errors.email && touched.email && errors.email}
+                        helperText={ errors.email && touched.email && errors.email}
                     />
-                    {
-                        errors.password && touched.password && errors.password
-                    }
-                    <button disabled={isSubmitting} className='border-b-2 px-2 m-auto' type='submit'>LogIn</button>
-                </form>
+                    <LoadingButton disabled={isSubmitting} sx={{mb:3}} loading={isSubmitting} variant="contained" fullWidth className='' type='submit'>LogIn</LoadingButton>
+                    <LoginGoogle/>
+                    <Button
+                    component={Link}
+                    to="/register"
+                    >Registrate</Button>
+                </Box>
             )}            
         </Formik>
-            <LoginGoogle/>
-     </div>
-    </>
+    </Box>
   )
 }
 

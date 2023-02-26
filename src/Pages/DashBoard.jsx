@@ -1,3 +1,4 @@
+import { Box, Typography } from '@mui/material'
 import React from 'react'
 import { useUserContext } from '../Context/ContextUser'
 
@@ -8,12 +9,11 @@ const DashBoard = () => {
 
   return (
     <>
-    <h1 className='text-3xl mb-4 text-center'>DashBoard</h1>
-
-    <div className=''>
-      <h3 className='text-2xl mb-2'>Bienvenido:</h3>
-      <p className='mb-2'>{user.email}</p>
-    </div>
+     <Box sx={{mt:"1rem", maxWidth:"400px", textAlign:"center", mx:"auto"}}>
+      <Typography variant='h4'>DashBoard</Typography>
+      <h3 className=''>Bienvenido:</h3>
+      <p className=''>{user.email}</p>
+    </Box>
     </>
   )
 }

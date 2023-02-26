@@ -1,5 +1,6 @@
+import { AppBar, Box, Button, Toolbar } from '@mui/material'
 import React from 'react'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useUserContext } from '../Context/ContextUser'
 import { logOut } from '../Utils/firebase'
 
@@ -17,25 +18,26 @@ const Navbar = () => {
 
 
   return (
-    <div className='px-6 my-2 flex justify-between text-white items-baseline'>
-        <Link to='/' className=' font-bold text-4xl '>Titulo</Link>
-        <nav className='font-semibold flex justify-around gap-8'>
-            <NavLink to='/' className='border-b-2 px-2'>Links</NavLink>
+    <Box sx={{ display: 'flex', justifyContent: 'space-around' }}  className=''>
+        <AppBar position="static">
+        <Toolbar sx={{display: 'flex', justifyContent: 'space-between'}}>
+        <Button color="inherit" sx={{fontSize: '30px'}} component={Link} to='/' className='  '>Home</Button >
             {
                 user ? (
-                    <div className='flex justify-evenly gap-2'>
-                        <NavLink to='/dashboard' className='border-b-2 px-2'>Dashboard</NavLink>
-                        <button onClick={handleLogOut} className='border-b-2 px-2'>LogOut</button>
-                    </div>
+                    <Box sx={{}} className=''>
+                        <Button color="inherit" component={NavLink} to='/dashboard' className=''>Dashboard</Button>
+                        <Button color="inherit" onClick={handleLogOut} className=''>LogOut</Button>
+                    </Box>
                 ):(
-                    <>
-                    <Link to='/register' className='border-b-2 px-2'>Register</Link>
-                    <NavLink to='/Login' className='border-b-2 px-2'>Login</NavLink>
-                    </>
+                    <Box>
+                    <Button color="inherit" component={NavLink} to='/register' className=''>Register</Button>
+                    <Button color="inherit" component={NavLink} to='/login' className=''>Login</Button>
+                    </Box>
                 )
             }
-        </nav>
-    </div>
+            </Toolbar>
+        </AppBar>
+    </Box>
   )
 }
 
