@@ -1,10 +1,23 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../Utils/firebase";
 
 export const UserContext = createContext()
 
 const UserProvider = ({children})=>{
     
     const [user, setUser] = useState(false)
+    
+    useEffect(()=>{
+        console.log('useEffect')
+          const unsuscribe =  onAuthStateChanged(auth, (user)=>{
+                setUser(user)
+            })
+            return unsuscribe
+    },[])
+
+    if(user === false) return <p>Loading App...</p>
 
     return(
         <UserContext.Provider value={{user, setUser}}>

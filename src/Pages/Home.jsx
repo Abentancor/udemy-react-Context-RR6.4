@@ -1,12 +1,12 @@
 import React from 'react'
 
+
 const Home = () => {
 
   return (
     <>
-    <h2>
-      Home
-    </h2>
+    <h1 className='text-xl text-center mb-8'>Home</h1>
+
     </>
   )
 }

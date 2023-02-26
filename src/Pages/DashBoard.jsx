@@ -12,7 +12,6 @@ const DashBoard = () => {
 
     <div className=''>
       <h3 className='text-2xl mb-2'>Bienvenido:</h3>
-      <p className='text-xl mb-2' >"{user.name}"</p>
       <p className='mb-2'>{user.email}</p>
     </div>
     </>
