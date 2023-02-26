@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { useUserContext } from '../Context/ContextUser'
 
 import { login } from '../Utils/firebase'
+import LoginGoogle from '../Components/LoginGoogle'
 
 const LogIn = () => {
 
@@ -87,6 +88,7 @@ const LogIn = () => {
                 </form>
             )}            
         </Formik>
+            <LoginGoogle/>
      </div>
     </>
   )
